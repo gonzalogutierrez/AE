@@ -108,7 +108,7 @@ public class Espia extends Problem implements SimpleProblemForm{
             //funcion de fitness
             for (int i=1;i<ind2.genome.length;i++){
             	solaux += ind2.genome[i];
-                valor+=(mCostos[ind2.genome[i-1]][ind2.genome[i]])*Porcentaje(i);
+                valor+=((mCostos[ind2.genome[i-1]][ind2.genome[i]])*Porcentaje(i))+balanceo(ind2.genome[i-1],ind2.genome[i]);
             }
             
            if (solaux != sol ){
@@ -133,6 +133,14 @@ public class Espia extends Problem implements SimpleProblemForm{
             return 1.1;
         else
             return 1.3;
+    }
+    
+    public int balanceo(int i1,int i2){
+        int balance=0;
+        if (i1==i2)
+            balance=Integer.MAX_VALUE;
+        
+        return balance;
     }
     
     /*public static void main(String[] args) {
