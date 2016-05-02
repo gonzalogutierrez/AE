@@ -27,34 +27,52 @@ import java.util.Scanner;
 public class Espia extends Problem implements SimpleProblemForm{
     
     public static final String P_IN = "in";
+    //public static final String P_IN0 = "in.0";
 
     int [][] mCostos= new int[5][5];
+    int [][] mTemp= new int [3][2];
     ArrayList numeros= new ArrayList<Integer>();
     int res;
     Random rnd=new Random();
-    public File in;
+    public File matriz;
+    public File temporadas;
 
     @Override
     public void setup(EvolutionState state, Parameter base) {
         super.setup(state, base); //To change body of generated methods, choose Tools | Templates.
-        in = state.parameters.getFile(base.push(P_IN), null);
+        matriz = state.parameters.getFile(base.push("matriz"), null);
+        temporadas = state.parameters.getFile(base.push("temporadas"), null);
         
         Scanner s = null;
 
         try {
                 // Leemos el contenido del fichero
                 System.out.println("... Leemos el contenido del fichero ...");
-                s = new Scanner(in);
+                s = new Scanner(matriz);
                 // Leemos linea a linea el fichero
                 int fila=0;
                 while (s.hasNextLine()) {
                         String linea = s.nextLine(); 	// Guardamos la linea en un String
-                        String [] arrayStr=linea.split(",");
+                        String [] arrayStr=linea.split(" ");
                         for (int columna=0;columna<arrayStr.length;columna++){
                             mCostos[fila][columna]=Integer.parseInt(arrayStr[columna]);
                         }
                         fila++;
                         System.out.println(linea);      // Imprimimos la linea
+                }
+                System.out.println("... Leemos el contenido del fichero ...");
+                s = new Scanner(temporadas);
+                // Leemos linea a linea el fichero
+                fila=0;
+                 while (s.hasNextLine()) {
+                        String linea = s.nextLine(); 	// Guardamos la linea en un String
+                        String [] arrayStr=linea.split(",");
+                        for (int columna=0;columna<arrayStr.length;columna++){
+                            mTemp[fila][columna]=Integer.parseInt(arrayStr[columna]);
+                        }
+                        fila++;
+                        System.out.println(linea);
+                        
                 }
 
         } catch (Exception ex) {
@@ -74,32 +92,7 @@ public class Espia extends Problem implements SimpleProblemForm{
 
     @Override
     public void evaluate(EvolutionState state, Individual ind, int subpopulation, int thread) {
-            /*mCostos[0][0] = Integer.MAX_VALUE;
-            mCostos[0][1] = 131;
-            mCostos[0][2] = 532;
-            mCostos[0][3] = 620;
-            mCostos[0][4] = 823;
-            mCostos[1][0] = 134;
-            mCostos[1][1] = Integer.MAX_VALUE;
-            mCostos[1][2] = 277;
-            mCostos[1][3] = 124;
-            mCostos[1][4] = 757;
-            mCostos[2][0] = 503;       
-            mCostos[2][1] = 207;
-            mCostos[2][2] = Integer.MAX_VALUE;
-            mCostos[2][3] = 486;
-            mCostos[2][4] = 666;
-            mCostos[3][0] = 857;       
-            mCostos[3][1] = 74;
-            mCostos[3][2] = 381;
-            mCostos[3][3] = Integer.MAX_VALUE;
-            mCostos[3][4] = 99;
-            mCostos[4][0] = 842;     
-            mCostos[4][1] = 716;
-            mCostos[4][2] = 792;
-            mCostos[4][3] = 95;
-            mCostos[4][4] = Integer.MAX_VALUE;*/
-            
+    
             if (ind.evaluated) return;
             
             IntegerVectorIndividual ind2 = (IntegerVectorIndividual)ind;
