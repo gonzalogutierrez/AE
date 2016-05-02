@@ -16,6 +16,8 @@ import ec.vector.IntegerVectorIndividual;
 import java.io.File;
 
 import java.lang.System;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -27,6 +29,9 @@ public class Espia extends Problem implements SimpleProblemForm{
     public static final String P_IN = "in";
 
     int [][] mCostos= new int[5][5];
+    ArrayList numeros= new ArrayList<Integer>();
+    int res;
+    Random rnd=new Random();
     public File in;
 
     @Override
@@ -101,7 +106,24 @@ public class Espia extends Problem implements SimpleProblemForm{
             
             double valor = 0;//Calcular el fitness del individuo
             
+            
+            /*for(int i=0;i<4;i++){
+                numeros.add(i, i+1);
+            }*/
+            
             ind2.genome[0]=0;
+            
+            
+            /*int k=numeros.size();
+            int n=k;
+            for(int i=1;i<=k;i++){
+                res=rnd.nextInt(n);            
+                ind2.genome[i]=(Integer)numeros.get(res);
+                numeros.remove(res);
+                n--;
+            }*/
+     
+            
             int sol = (ind2.genome.length) * (ind2.genome.length-1)/2;
             
             int solaux = 0;
@@ -148,3 +170,4 @@ public class Espia extends Problem implements SimpleProblemForm{
     }*/
     
 }
+
